@@ -1,92 +1,90 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-body{ 
-    font-size: 16px;
-    font-family: cursive;
-    transition: 200ms ease-in-out;
+body {
+  font-size: 16px;
+  font-family: cursive;
+  transition: 200ms ease-in-out;
 }
 
-.container{
-    height: 100vh;
-    display: flex;
-    justify-content: flex-start;
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
 }
-.navCon{
-    position: sticky;
-    padding: 20px 10px;
-    .logo{
-        margin-bottom: 30px;
-        color: blue;
-        font-size: 25px;
-        font-family: "Orbitron", sans-serif;
-    }
-    ul{
-        margin-bottom: 30px;
-    }
-    li{
-        margin-top: 20px;
-        display: block;
-        width: 100%;
-    
-        a{
-            text-decoration: none;
-            color: #000;
-        }
-        :hover{
-            background-color: blue;
-            padding: 10px 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            color: white;
-        }
-    }
-    .footer{
-        font-size: small;
-    }
-}
-
-.dashboardCon{
+.navCon {
+  position: sticky;
+  padding: 20px 10px;
+  .logo {
+    margin-bottom: 30px;
+    color: blue;
+    font-size: 25px;
+    font-family: "Orbitron", sans-serif;
+  }
+  ul {
+    margin-bottom: 30px;
+  }
+  li {
+    margin-top: 20px;
+    display: block;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(128, 128, 128, 0.3);
-    color: #000;
-    padding: 20px 30px;
 
-    .dashboardLogo{
-        font-size: 25px;
-        font-family: "Orbitron", sans-serif;
+    a {
+      text-decoration: none;
+      color: #000;
     }
-    .searchCon{
-        input{
-        padding: 10px 45px;
-        }
-        .fa-solid{
-            position: absolute;
-            right: 45%;
-            top: 31px;
-            color: gray;
-        }
+    :hover {
+      background-color: blue;
+      padding: 10px 10px;
+      border-radius: 15px;
+      cursor: pointer;
+      color: white;
     }
-    .icons{
-        gap: 510px;
-        font-size: 20px;
-    }
-    .userCon{
-        display: flex;
-        gap: 15px;
-        img{
-            width: 40px;
-            height: 40px;
-        }
-        p{
-            font-size: small;
-        }
-    }
+  }
+  .footer {
+    font-size: small;
+  }
 }
 
+.dashboardCon {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(128, 128, 128, 0.3);
+  color: #000;
+  padding: 20px 30px;
+
+  .dashboardLogo {
+    font-size: 25px;
+    font-family: "Orbitron", sans-serif;
+  }
+  .searchCon {
+    input {
+      padding: 10px 45px;
+    }
+    .fa-solid {
+      position: absolute;
+      right: 45%;
+      top: 31px;
+      color: gray;
+    }
+  }
+  .icons {
+    gap: 510px;
+    font-size: 20px;
+  }
+  .userCon {
+    display: flex;
+    gap: 15px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+    p {
+      font-size: small;
+    }
+  }
+}
