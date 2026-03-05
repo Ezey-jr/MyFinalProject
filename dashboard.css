@@ -8,11 +8,13 @@ body {
   font-family: cursive;
   transition: 200ms ease-in-out;
 }
+
 .container {
   height: 100vh;
   display: flex;
   justify-content: flex-start;
 }
+
 .navCon {
   position: sticky;
   padding: 20px 10px;
