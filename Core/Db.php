@@ -21,17 +21,15 @@ class Db
             // setting PDO attributes:
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //setting error mode
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ); //setting fetch mode
-
-            if($pdo){
-                echo "connected successfully";
-            }
-            // $this->connect = $pdo;
+            $this->connect = $pdo;
 
         } catch (PDOException $e) {
                 echo "Error found:".$e->getMessage();
         }
     }
+
+    public function connection (){
+        return $this->connect ;
+    }
 }
 
-
-$db = new Db();
