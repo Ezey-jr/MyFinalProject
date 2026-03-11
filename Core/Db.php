@@ -15,7 +15,7 @@ class Db
 
         try {
 
-            $dsn = "mysql:host=$this->host;db_name=$this->db;";
+            $dsn = "mysql:host=$this->host;dbname=$this->db;";
             $pdo = new PDO($dsn, $this->username, $this->password); //new object of PDO created
 
             // setting PDO attributes:
@@ -28,8 +28,9 @@ class Db
         }
     }
 
-    public function connection (){
-        return $this->connect ;
+    public static function connection (){
+        return (new self)->connect ;
     }
 }
 
+ 

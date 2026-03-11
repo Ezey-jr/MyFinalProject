@@ -8,7 +8,6 @@ class User
     // creates new user
     public static function create(array $data)
     {
-        $db = new Db ;
         // generate token
         $time = microtime(TRUE);
         $token = md5($time);
@@ -16,11 +15,21 @@ class User
 
         $data[] = $token;
         $sql = "INSERT INTO `users` (`name`,`email`,`password`,`token`)  VALUES (?,?,?,?)";
-        $stmt = $db->connection()->prepare($sql);
+        $stmt = Db::connection()->prepare($sql);
         if ($stmt->execute($data)) {
             return true;
         } else {
             return false;
         }
     }
+
+    
+    public static function find_by_email ($email){
+        $sql = "SELECT * FROM `users` WHERE `email` = ? LIMIT 1";
+        $stmt = Db::connection()->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt ;
+        
+    }
+    
 }

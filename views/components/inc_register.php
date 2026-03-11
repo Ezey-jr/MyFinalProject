@@ -1,6 +1,11 @@
 <?php
-require_once "Core/Db.php";
 require_once "Controller/UserController.php";
+require_once "Core/Session.php";
+require_once "Core/Message.php";
+
+// start session everytime
+Session::start();
+
 $errors = [];
 
 // checking the request method
@@ -25,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $errors[] = "invalid email";
         }
 
+        // checking if email exist
+        if (UserController::emailExist($email)) {
+            $errors[] = "email already exist";
+        }
+
 
         if (!Helpers::strong_password($password)) {
             $errors[] = "password should be at least 6 characters long";
@@ -37,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 
     // storing datas to the data base
-    if(empty($errors)){
+    if (empty($errors)) {
 
-    $user_controller = new UserController ;
+        $user_controller = new UserController;
         // encrypt password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -48,9 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $email,
             $hashed_password
         ];
+
         // storing user data 
-        if($user_controller->store($data)){
-            header("Location:index.php");
+        if ($user_controller->store($data)) {
+            Message::setMessage("Registration has been completed successfully.");
+            header("Location:login.php");
             exit;
         }
     }
