@@ -90,11 +90,12 @@ body {
   padding: 15px 50px;
   border-radius: 15px;
   background-color: rgba(7, 151, 132, 0.7);
+}
 
-  :hover {
-    background-color: rgba(7, 151, 132);
-    color: white;
-  }
+.signInBtn:hover{
+  background-color: rgba(7, 151, 132);
+  cursor: pointer;
+  color: white;
 }
 
 /* sign up page */
@@ -121,18 +122,19 @@ p {
   background-color: inherit;
   border: none;
   display: inline-block;
+}
 
-  a {
+.signUpBtn a {
     text-decoration: none;
     color: white;
     padding: 15px 50px;
     border-radius: 15px;
     width: 80px;
-    background-color: rgba(7, 151, 132);
+    border: 1px solid white;
+    background-color: none;
   }
 
-  :hover {
-    background-color: rgba(7, 151, 132, 0.7);
-    color: white;
+  .signUpBtn a:hover {
+    background-color: white;
+    color: rgba(7, 151, 132, 0.7);
   }
-}
