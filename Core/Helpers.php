@@ -34,4 +34,9 @@ class Helpers
 
         return true;
     }
+
+    public static function redirect(string $url){
+        header("Location:$url");
+        exit;
+    }
 }

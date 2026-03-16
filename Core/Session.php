@@ -3,9 +3,9 @@
 
  class Session {
     // starts a new session
-     public static function start (){
-        return session_start();
-     }
+   //   public static function start (){
+   //      return session_start();
+   //   }
 
      public static function stop (){
         (new self)::start();

@@ -5,7 +5,7 @@ require_once "Core/Message.php";
 require_once "Core/Helpers.php";
 
 // start session everytime
-Session::start();
+// Session::start();
 
 $errors = [];
 

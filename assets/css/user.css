@@ -1,0 +1,130 @@
+:root {
+  --primary-bg: rgba(7, 151, 132, 0.7);
+  --secondary-bg: white;
+  --primary-color: gray;
+  --secondary-color: black;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Fjalla One", sans-serif;
+  transition: 200ms ease-in-out;
+}
+
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* side bar */
+.profileCon {
+  width: 25%;
+  height: 100vh;
+  background-color: var(--primary-bg);
+  color: var(--secondary-bg);
+  text-align: center;
+  position: sticky;
+  top: 0;
+}
+
+img {
+  margin: 10px 0;
+  border-radius: 50%;
+}
+
+h1 {
+  color: var(--secondary-bg);
+  margin-bottom: 10px;
+  font-family: "Orbitron", sans-serif;
+}
+
+p {
+  margin-bottom: 50px;
+}
+
+p a {
+  text-decoration: none;
+  color: white;
+}
+
+p a:hover {
+  color: #000;
+  cursor: pointer;
+}
+
+li {
+  margin-bottom: 30px;
+}
+
+li a {
+  text-decoration: none;
+  color: var(--secondary-bg);
+}
+
+li a:hover {
+  color: #000;
+}
+
+.menu {
+  margin-left: 30px;
+  margin-top: 10px;
+  list-style: none;
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/* form */
+.formCon {
+  width: 35%;
+  background-color: var(--secondary-bg);
+  color: var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+}
+
+h2 {
+  color: var(--primary-bg);
+  font-size: 25px;
+  font-family: "Orbitron", sans-serif;
+  margin-bottom: 30px;
+}
+
+input,
+select {
+  margin-bottom: 40px;
+  width: 80%;
+  padding: 10px;
+}
+
+label,
+input {
+  display: block;
+}
+
+label {
+  color: var(--primary-bg);
+}
+
+textarea {
+  width: 80%;
+  padding: 10px;
+}
+
+.pass {
+  position: relative;
+}
+
+.fa-eye-slash {
+  position: absolute;
+  right: 8%;
+  bottom: 32%;
+}
