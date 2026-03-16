@@ -44,6 +44,9 @@ body {
   font-family: "Rubik", sans-serif;
   margin-bottom: 15px;
 }
+p{
+  margin-bottom: 20px;
+}
 
 /* facebook, google, linkedin icons */
 .signInLogos {
@@ -67,6 +70,10 @@ body {
     margin-top: 12px;
     position: absolute;
   }
+  .fa-eye-slash{
+    position: absolute;
+    left: 37%;
+  }
 
   input {
     padding: 15px;
@@ -79,7 +86,14 @@ body {
   input::placeholder {
     padding: 10px;
   }
+  
 }
+
+.error{
+    font-size: small;
+    font-family: "Rubik", sans-serif;
+    color: #000;
+  }
 
 /* sign in button */
 .signInBtn {
@@ -100,21 +114,26 @@ body {
 
 /* sign up page */
 .signUpCon {
-  width: 30%;
+  width: 50%;
   background-color: rgba(7, 151, 132, 0.7);
   color: white;
-  padding: 85px 0;
-  text-align: center;
+  padding: 85px;
+  text-align: end;
+
+  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-.signUpCon h1 {
+.signUpdetails{
+  margin-left: 120px;
+}
+.signUpdetails h1 {
   font-family: "Rubik", sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: white;
 }
 
-p {
-  margin-bottom: 30px;
+.signUpdetails p {
+  margin-bottom: 80px;
 }
 
 /* sign up button */
