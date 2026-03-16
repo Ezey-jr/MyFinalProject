@@ -1,7 +1,9 @@
 <?php
 require_once "Core/Session.php";
 require_once "Core/Message.php";
+require_once "Core/Auth.php";
 require_once "views/components/inc_login.php";
+Auth::logout_redirect();
 
 if(Message::check()){
     print Message::getMessage();
