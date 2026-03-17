@@ -1,6 +1,6 @@
 <?php
-
-require_once "../Core/Db.php";
+require_once "Core/Config.php";
+require_once ROOT."/Core/Db.php";
 
 class Post 
 {
@@ -33,6 +33,13 @@ class Post
         $sql = "SELECT * FROM `posts` ORDER BY `id` DESC";
         $stmt = Db::connection()->query($sql);
         $result =  $stmt->fetchAll();
+        return $result;
+    }
+
+    public static function recent (int $limit){
+        $sql = "SELECT * FROM `posts` ORDER BY `id` DESC LIMIT $limit";
+        $stmt = Db::connection()->query($sql);
+        $result = $stmt->fetchAll();
         return $result;
     }
     
