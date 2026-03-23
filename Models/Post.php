@@ -1,8 +1,8 @@
 <?php
 require_once "Core/Config.php";
-require_once ROOT."/Core/Db.php";
+require_once ROOT . "/Core/Db.php";
 
-class Post 
+class Post
 {
 
 
@@ -11,36 +11,53 @@ class Post
     {
 
 
-        $sql = "INSERT INTO `posts` (`title`,`author`,`body`, `category`, `status`, `excerpt`, `meta_desc`)  VALUES (?,?,?,?,?,?,?)";
-        $stmt = Db::connection()->prepare($sql);
-        if ($stmt->execute($data)) {
-            return true;
+
+        if (isset($data['featured_image']) && !empty($data['featured_image'])) {
+            $sql = "INSERT INTO `posts` (`title`,`author`,`body`, `category`, `status`, `excerpt`, `meta_desc`, `user_id`, `featured_image`)  VALUES (?,?,?,?,?,?,?,?,?)";
+            $stmt = Db::connection()->prepare($sql);
+
+            $data = array_values($data);
+
+            if ($stmt->execute($data)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            $sql = "INSERT INTO `posts` (`title`,`author`,`body`, `category`, `status`, `excerpt`, `meta_desc`, `user_id`)  VALUES (?,?,?,?,?,?,?,?)";
+            $stmt = Db::connection()->prepare($sql);
+
+            $data = array_values($data);
+            if ($stmt->execute($data)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    
-    public static function find_post ($id){
+
+    public static function find_post($id)
+    {
         $sql = "SELECT * FROM `posts` WHERE `id` = ? LIMIT 1";
         $stmt = Db::connection()->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt ;
-        
+        return $stmt;
     }
 
-    public static function all_post(){
+    public static function all_post()
+    {
         $sql = "SELECT * FROM `posts` ORDER BY `id` DESC";
         $stmt = Db::connection()->query($sql);
         $result =  $stmt->fetchAll();
         return $result;
     }
 
-    public static function recent (int $limit){
+    public static function recent(int $limit)
+    {
         $sql = "SELECT * FROM `posts` ORDER BY `id` DESC LIMIT $limit";
         $stmt = Db::connection()->query($sql);
         $result = $stmt->fetchAll();
         return $result;
     }
-    
 }

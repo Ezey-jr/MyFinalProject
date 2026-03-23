@@ -11,7 +11,6 @@ $user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
 include_once "views/layouts/header.php";
 ?>
 
-
   <main class="page-content">
     <div class="page-header">
       <div>
@@ -39,7 +38,7 @@ include_once "views/layouts/header.php";
     <?php endif; ?>
 
     <!-- Form -->
-    <form method="POST" action="" id="postForm">
+    <form method="POST" action="" id="postForm"  enctype="multipart/form-data">
       <div class="form-grid">
 
         <!-- Left: Main content -->
