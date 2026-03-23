@@ -1,25 +1,16 @@
 
 <?php
-require_once "Controller/UserController.php";
-require_once "Core/Session.php";
-require_once "Core/Message.php";
-require_once "Core/Helpers.php";
-require_once "Core/Auth.php";
-require_once "Controller/PostController.php";
-session_start();
+
+include_once "views/components/inc_add_post.php";
+
+$page_title = "Add New Post";
 
 $total_posts = count(PostController::index()) ;
 $user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
 
-$success_msg = "";
-$error_msg   = "";
-
-?>
-<?php 
-include_once "views/components/inc_add_post.php";
 include_once "views/layouts/header.php";
-
 ?>
+
 
   <main class="page-content">
     <div class="page-header">
@@ -63,7 +54,7 @@ include_once "views/layouts/header.php";
                 <label class="form-label" for="title">Post Title <span class="req">*</span></label>
                 <input type="text" class="form-input" id="title" name="title"
                   placeholder="Enter an engaging post title…"
-                  value="<?php echo htmlspecialchars($_POST['title'] ?? ''); ?>" required>
+                  value="<?php echo htmlspecialchars($_POST['title'] ?? ''); ?>" >
               </div>
 
               <div class="form-group">
@@ -85,7 +76,7 @@ include_once "views/layouts/header.php";
               <div class="form-group" style="margin-bottom:0;">
                 <label class="form-label" for="body">Content <span class="req">*</span></label>
                 <textarea class="form-textarea" id="body" name="body"
-                  placeholder="Write your post content here…" required><?php echo htmlspecialchars($_POST['body'] ?? ''); ?></textarea>
+                  placeholder="Write your post content here…" ><?php echo htmlspecialchars($_POST['body'] ?? ''); ?></textarea>
                 <div class="form-hint">HTML is supported. A rich text editor can be wired in here (e.g. TinyMCE).</div>
               </div>
             </div>

@@ -1,34 +1,50 @@
 <?php
+require_once "Controller/UserController.php";
+require_once "Core/Session.php";
+require_once "Core/Message.php";
+require_once "Core/Helpers.php";
+require_once "Core/Auth.php";
+require_once "Controller/PostController.php";
+session_start();
+
+$success_msg = "";
+$error_msg   = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    print_r($_POST);
-    die();
+
   // ── Sanitize inputs ──
-  $title    = trim($_POST["title"]    ?? "");
-  $slug     = trim($_POST["slug"]     ?? "");
-  $category = trim($_POST["category"] ?? "");
-  $status   = trim($_POST["status"]   ?? "draft");
-  $excerpt  = trim($_POST["excerpt"]  ?? "");
-  $body     = trim($_POST["body"]     ?? "");
-  $meta_desc= trim($_POST["meta_desc"]?? "");
+  $title    = Helpers::sanitize($_POST["title"]    ?? "");
+  // $slug     = Helpers::sanitize($_POST["slug"]     ?? "");
+  $category = Helpers::sanitize($_POST["category"] ?? "");
+  $status   = Helpers::sanitize($_POST["status"]   ?? "draft");
+  $excerpt  = Helpers::sanitize($_POST["excerpt"]  ?? "");
+  $body     = Helpers::sanitize($_POST["body"]     ?? "");
+  $meta_desc = Helpers::sanitize($_POST["meta_desc"] ?? "");
+  $author = Auth::user()->name;
 
   // ── Validate ──
-  if (empty($title) || empty($body)) {
+  if (strlen($title) < 1 || strlen($body) < 1) {
     $error_msg = "Title and content are required.";
   } else {
-    // ── INSERT query will go here ──
-    // $stmt = $conn->prepare(
-    //   "INSERT INTO posts (title, slug, category, status, excerpt, body, meta_desc, created_at)
-    //    VALUES (?, ?, ?, ?, ?, ?, ?, NOW())"
-    // );
-    // $stmt->bind_param("sssssss", $title, $slug, $category, $status, $excerpt, $body, $meta_desc);
-    // $stmt->execute();
+    // arrange the data 
+    [
+      'title' => $title,
+      'body' => $body,
+      'excerpt' => $excerpt,
+      'status' => $status,
+      'author' => $author,
+      'meta_desc' => $meta_desc,
+      'category' => $category
+    ];
 
-    $success_msg = "Post saved successfully!";
+    if (PostController::add($data)) {
+      $success_msg = "Post saved successfully!";
+    }
   }
 }
 
-$categories = ["Tutorial", "Frontend", "Backend", "Database", "General"];
 
-?>
+
+$categories = ["Tutorial", "Frontend", "Backend", "Database", "General"];

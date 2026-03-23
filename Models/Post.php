@@ -11,7 +11,7 @@ class Post
     {
 
 
-        $sql = "INSERT INTO `posts` (`title`,`author`,`body`)  VALUES (?,?,?)";
+        $sql = "INSERT INTO `posts` (`title`,`author`,`body`, `category`, `status`, `excerpt`, `meta_desc`)  VALUES (?,?,?,?,?,?,?)";
         $stmt = Db::connection()->prepare($sql);
         if ($stmt->execute($data)) {
             return true;

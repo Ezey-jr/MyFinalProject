@@ -1,16 +1,27 @@
 <?php
 require_once "Core/Config.php";
-require_once ROOT."/Models/Post.php";
+require_once ROOT . "/Models/Post.php";
 
-class PostController {
+class PostController
+{
 
-        public static function index (){
-            $data = Post::all_post();
-            return $data ;
+    public static function index()
+    {
+        $data = Post::all_post();
+        return $data;
+    }
+
+    public static function latest($limit)
+    {
+        $data = Post::recent($limit);
+        return $data;
+    }
+
+    public static function add($data)
+    {
+        if (Post::create($data)) {
+            return true;
         }
-
-        public static function latest ($limit){
-            $data = Post::recent($limit);
-            return $data ;
-        }
+        return false;
+    }
 }
