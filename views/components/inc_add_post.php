@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   } else {
 
 
-  die(var_dump($_FILES));
     $tmp_file = $_FILES['featured_image']['tmp_name'];
     $upload_file_name = $_FILES['featured_image']['name'];
     $new_array = explode(".", $upload_file_name);
@@ -47,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // arrange the data 
     $data = [
       'title' => $title,
-      'excerpt' => $excerpt,
       'author' => $author,
       'body' => $body,
       'category' => $category,
       'status' => $status,
+      'excerpt' => $excerpt,
       'meta_desc' => $meta_desc,
       'user_id' => Auth::user()->id
     ];

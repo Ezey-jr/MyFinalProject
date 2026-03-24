@@ -53,6 +53,19 @@ class Post
         return $result;
     }
 
+    public static function update($id, $post_data){
+        $sql = "UPDATE `posts` SET `title` = ?, `excerpt` = ?,  `body` = ?,  `category` = ?, `status` = ?, `meta_desc` = ? WHERE `id` = '$id' LIMIT 1";
+
+        $stmt = DB::connection()->prepare($sql);
+        if($stmt->execute($post_data)){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
     public static function recent(int $limit)
     {
         $sql = "SELECT * FROM `posts` ORDER BY `id` DESC LIMIT $limit";

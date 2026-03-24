@@ -24,4 +24,14 @@ class PostController
         }
         return false;
     }
+
+
+    public static function find($id){
+        return Post::find_post($id);
+
+    }
+
+    public static function update ($id, $post_data){
+        return Post::update($id, $post_data);
+    }
 }
