@@ -178,7 +178,6 @@ body{
 .cardsWrapper{
   width: 100%;
   overflow: hidden;
-  position: relative;
 }
 
 .cards{
@@ -194,6 +193,10 @@ body{
   gap: 2%;
 }
 
+.cardGroup:second-child, .cardGroup:third-child, .cardGroup:fourth-child, .cardGroup:fifth-child{
+  display: block;
+}
+
 /* .cardGroup{
   width: 100%;
   display: grid;
@@ -205,9 +208,22 @@ body{
 .card{
   width: 32%;
   margin-bottom: 30px;
-  position: relative
+  position: relative;
+  display: block;
 }
 
+.card:hover{
+  border: 3px solid black;
+  height: 350px;
+  cursor: pointer;
+  transform: translateY(-5px);
+  display: block;
+}
+
+.links{
+  text-decoration: none;
+  color: black;
+}
 
 .card img{
   width: 100%;
@@ -294,7 +310,6 @@ body{
 
 .arrow{
   font-size: 30px;
-  /* background-color: #000; */
   color: black;
   width: 60px;
   height: 50px;
@@ -303,10 +318,10 @@ body{
   background-color: gray;
 }
 
-/* .arrow.left{
+.arrow.left{
   position: absolute;
   left: 0;
-  top: 0;
+  top: 130%;
 }
 
 .arrow.right{
@@ -314,7 +329,7 @@ body{
   right: 0;
   top: 130%;
 
-} */
+}
 
 /* third section */
 .imgCon{

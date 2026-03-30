@@ -20,6 +20,7 @@ arrows.forEach(arrow => {
             current = cardGroups.length -1;
         }
         
+        
         cards.style.transform =`translateX(-${current * 100}%)`;
     })
 });
