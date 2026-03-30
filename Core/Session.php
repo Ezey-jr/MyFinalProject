@@ -1,6 +1,7 @@
 <?php
 
 
+<<<<<<< HEAD
 class Session
 {
   // starts a new session
@@ -10,6 +11,13 @@ class Session
     self::check_timeout();
     return true;
   }
+=======
+ class Session {
+    // starts a new session
+   //   public static function start (){
+   //      return session_start();
+   //   }
+>>>>>>> origin
 
   public static function stop()
   {
