@@ -39,4 +39,8 @@ class Helpers
         header("Location:$url");
         exit;
     }
+
+    public static function sanitize (string $string): string{
+            return trim(htmlentities(htmlspecialchars($string)));
+    }
 }

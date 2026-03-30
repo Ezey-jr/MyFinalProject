@@ -1,10 +1,10 @@
 <?php
-
+require_once "../Core/Config.php";
 header('Access-Control-Allow-Origin: *');
 header("Content-Type: application/json");
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
-require_once "../Controller/PostController.php";
+require_once ROOT."/Controller/PostController.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
     $all_post = PostController::index();
