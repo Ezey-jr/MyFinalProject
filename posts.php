@@ -117,7 +117,7 @@ $status_badge = [
                   </svg>
                 </button>
                 <button class="action-btn danger" title="Delete post"
-                  onclick="confirmDelete(<?php echo $post ?>, '<?php echo addslashes($post->title); ?>')">
+                  onclick="">
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <polyline points="3 6 5 6 21 6"/>
                     <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
@@ -160,44 +160,41 @@ $status_badge = [
 <script src="app.js"></script>
 <script>
 // Client-side filter (will be replaced by server-side PHP + DB filtering)
-// const searchInput    = document.getElementById('searchInput');
-// const statusFilter   = document.getElementById('statusFilter');
-// const categoryFilter = document.getElementById('categoryFilter');
+const searchInput    = document.getElementById('searchInput');
+const statusFilter   = document.getElementById('statusFilter');
+const categoryFilter = document.getElementById('categoryFilter');
 
-// function filterTable() {
-//   const q   = searchInput.value.toLowerCase();
-//   const st  = statusFilter.value;
-//   const cat = categoryFilter.value;
-//   const rows = document.querySelectorAll('#postsTable tbody tr');
-//   let visible = 0;
-//   rows.forEach(row => {
-//     const title    = row.querySelector('.title-text').textContent.toLowerCase();
-//     const status   = row.dataset.status;
-//     const category = row.dataset.category;
-//     const show = title.includes(q)
-//       && (st  === '' || status   === st)
-//       && (cat === '' || category === cat);
-//     row.style.display = show ? '' : 'none';
-//     if (show) visible++;
-//   });
-//   document.getElementById('paginationInfo').textContent = `Showing ${visible} post${visible !== 1 ? 's' : ''}`;
-// }
+function filterTable() {
+  const q   = searchInput.value.toLowerCase();
+  const st  = statusFilter.value;
+  const cat = categoryFilter.value;
+  const rows = document.querySelectorAll('#postsTable tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const title    = row.querySelector('.title-text').textContent.toLowerCase();
+    const status   = row.dataset.status;
+    const category = row.dataset.category;
+    const show = title.includes(q)
+      && (st  === '' || status   === st)
+      && (cat === '' || category === cat);
+    row.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('paginationInfo').textContent = `Showing ${visible} post${visible !== 1 ? 's' : ''}`;
+}
 
-// searchInput.addEventListener('input', filterTable);
-// statusFilter.addEventListener('change', filterTable);
-// categoryFilter.addEventListener('change', filterTable);
+searchInput.addEventListener('input', filterTable);
+statusFilter.addEventListener('change', filterTable);
+categoryFilter.addEventListener('change', filterTable);
 
-// function confirmDelete(id, title) {
-//   if (confirm(`Delete "${title}"?\n\nThis cannot be undone.`)) {
-//     // Replace with: window.location.href = `delete-post.php?id=${id}`;
-//     showToast(`Post "${title}" deleted.`, 'error');
-//     document.querySelector(`tr[data-status]`); // placeholder
-//   }
-// }
+function confirmDelete(id, title) {
+  if (confirm(`Delete "${title}"?\n\nThis cannot be undone.`)) {
+    // Replace with: window.location.href = `delete-post.php?id=${id}`;
+    showToast(`Post "${title}" deleted.`, 'error');
+    document.querySelector(`tr[data-status]`); // placeholder
+  }
+}
 
-console.log("hello world");
-console.log("again");
-alert("guys");
 </script>
 <?php include_once "views/layouts/footer.php" ?>
 

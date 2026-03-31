@@ -1,8 +1,9 @@
 <?php
-require_once "Core/Session.php";
-require_once "Core/Message.php";
-require_once "Core/Auth.php";
-require_once "views/components/inc_login.php";
+session_start();
+require_once "Core/Config.php";
+require_once    ROOT."/Core/Message.php";
+require_once ROOT."/Core/Auth.php";
+require_once ROOT."/views/components/inc_login.php";
 Auth::logout_redirect();
 
 if(Message::check()){

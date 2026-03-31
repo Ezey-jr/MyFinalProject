@@ -1,7 +1,9 @@
  <?php
 
-    require_once "Models/User.php";
-    require_once "Core/Auth.php";
+    require_once "Core/Config.php";
+    require_once ROOT . "/Core/Auth.php";
+    require_once ROOT . "/Models/User.php";
+
 
 
 

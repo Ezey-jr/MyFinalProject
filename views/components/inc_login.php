@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if (UserController::process_login($email, $password)) {
             // storing user data 
             Message::setMessage("Welcome to 2026 blog of the Year.");
-            header("Location:index.php");
+            header("Location:dashboard.php");
             exit;
         } else {
             $errors[] = "incorrect password or email";

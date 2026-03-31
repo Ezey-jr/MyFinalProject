@@ -1,5 +1,5 @@
 <?php
-require_once "../Core/Config.php";
+require_once  dirname(__DIR__)."/Core/Config.php";
 require_once ROOT . "/Models/Post.php";
 
 class PostController

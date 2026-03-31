@@ -1,3 +1,91 @@
+
+/**
+ * Opens the post viewing modal with post data
+ * @param {Object} postData - Post object with id, title, excerpt, body, author, date, category, status, views
+ */
+
+
+function openPostModal(postData) {
+  
+  const modal = document.getElementById('postModal');
+  if (!modal) return;
+
+  // Populate modal content
+  document.getElementById('modalTitle').textContent = postData.title;
+  document.getElementById('modalAuthor').textContent = postData.author || 'Unknown';
+  document.getElementById('modalDate').textContent = postData.date || 'N/A';
+  document.getElementById('modalViews').textContent = postData.views > 0 ? postData.views.toLocaleString() : '0';
+  document.getElementById('modalCategory').textContent = postData.category || 'Uncategorized';
+
+  // Update status badge
+  const statusBadge = document.getElementById('modalStatusBadge');
+  statusBadge.textContent = postData.status || 'draft';
+  statusBadge.className = 'modal-status-badge ' + (postData.status || 'draft');
+
+  // Set excerpt and body (body supports HTML)
+  document.getElementById('modalExcerpt').textContent = postData.excerpt || '';
+  document.getElementById('modalBody').innerHTML = postData.body || '';
+
+  // Update Edit button link
+  const editBtn = document.getElementById('modalEditBtn');
+  editBtn.href = 'edit-post.php?id=' + postData.id;
+
+  // Show modal with animation
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Closes the post viewing modal with animation
+ */
+function closePostModal() {
+  const modal = document.getElementById('postModal');
+  if (!modal) return;
+
+  modal.classList.add('closing');
+
+  setTimeout(() => {
+    modal.classList.remove('open', 'closing');
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+/**
+ * Initialize modal event listeners (call on DOMContentLoaded)
+ */
+function initPostModal() {
+  const modal = document.getElementById('postModal');
+  if (!modal) return;
+
+  const closeBtn = document.getElementById('modalCloseBtn');
+  const closeFooterBtn = document.getElementById('modalCloseFooterBtn');
+
+  // Close button (X)
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closePostModal);
+  }
+
+  // Escape key to close
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closePostModal();
+    }
+  });
+
+  // Close footer button
+  if (closeFooterBtn) {
+    closeFooterBtn.addEventListener('click', closePostModal);
+  }
+}
+
+// Initialize on page load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPostModal);
+} else {
+  initPostModal();
+}
+
+
 // const arrows = document.querySelectorAll(`.arrow`);
 // const cardGroups = document.querySelectorAll(`.cardGroup`);
 // const cards = document.querySelector(`.cards`);
@@ -31,7 +119,7 @@ function renderPost(posts) {
     .map(
       (post) => `
   <div class="card" id="card-post">
-    <img src=${post.featured_image} alt=" Post Image" />
+    <img src=http://localhost/php_sandbox_2/final_project/assets/file_uploads/${post.featured_image} alt=" Post Image" />
     <p class="blog nation">${post.category}</p>
 
     <div class="cardContent">
@@ -42,7 +130,7 @@ function renderPost(posts) {
       </div>
       <div class="cardDetails">
         <h1 class="blogTitle">
-          <a href="">${post.title}</a>
+          <button class="post-btn" onClick="${openPostModal(post)}"  data-post="${post.id}">${post.title}</button>
         </h1>
         <p class="blogContent">${post.excerpt}
         </p>
@@ -56,9 +144,23 @@ function renderPost(posts) {
     )
     .join('');
 }
- console.log('hello')
+
+// async function getPost (id){
+//     const url = 
+// }
+
+// check line 133
+function handleShowPost(){
+    const postBtns = document.querySelectorAll(".post-btn");
+    postBtns.forEach(postBtn => {
+        postBtn.addEventListener('click', e =>{
+            const id = e.target.dataset.post;
+            
+        })
+    });
+}
 async function fetchPost() {
-  const url = 'http://localhost/php_sandbox/MyFinalProject/api/';
+  const url = 'http://localhost/php_sandbox_2/final_project/api/';
 
   try {
     const response = await fetch(url);
@@ -67,16 +169,10 @@ async function fetchPost() {
     }
     const data = await response.json();
     renderPost(data);
+    handleShowPost();
+
   } catch (error) {
     console.error(error.message);
   }
 }
 document.addEventListener('DOMContentLoaded', fetchPost);
-
-document.addEventListener('DOMContentLoaded', () =>{
-  const cardPost = document.getElementById('card-post')
-
-  cardPost.addEventListener('click', () => {
-    
-  })
-})

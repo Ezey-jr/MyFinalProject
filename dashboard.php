@@ -1,4 +1,5 @@
 <?php
+
 require_once "Controller/UserController.php";
 require_once "Core/Session.php";
 require_once "Core/Message.php";

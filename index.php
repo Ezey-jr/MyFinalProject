@@ -1,10 +1,25 @@
+<?php
+session_start();
+require_once "Core/Config.php";
+require_once ROOT . "/Core/Session.php";
+require_once ROOT . "/Core/Message.php";
+require_once ROOT . "/Core/Helpers.php";
+require_once ROOT . "/Core/Auth.php";
+require_once ROOT . "/Controller/PostController.php";
+
+
+// start session everytime
+$total_posts = count(PostController::index());
+?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Blog</title>
+  <link rel="stylesheet" href="assets/css/modal.css" />
   <link rel="stylesheet" href="assets/css/page.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
@@ -15,7 +30,12 @@
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+
+
 </head>
+
+<?php // include modals
+include_once ROOT . "/views/components/post-view-modal.php"; ?>
 
 <body>
   <!-- main container -->
@@ -28,35 +48,37 @@
             <i class="fa-solid fa-qrcode"></i>
             Blog
           </div>
-          <div class="nav">
-            <ul>
-              <li><a href="">Profile</a></li>
-              <li><a href="">Dashboard</a></li>
-              <li><a href="">Login</a></li>
-              <li><a href="">Sign up</a></li>
-            </ul>
-          </div>
+
+          <?php if (Auth::check() === true): ?>
+            <div class="nav">
+              <ul>
+                <li><a href="edit_profile.php">Profile</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
+              </ul>
+            </div>
+          <?php endif; ?>
 
           <div class="searchCon">
             <input type="search" name="" id="search" placeholder="search.." />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="userDetails">
-            <p><a href="">Login</a></p>
-            <p><a href="">Sign Up</a></p>
-          </div>
+          <?php if (Auth::check() == false) : ?>
+            <div class="userDetails">
+              <p><a href="login.php">Login</a></p>
+              <p><a href="register.php">Sign Up</a></p>
+            </div>
         </div>
-
-        <!-- second div in the first section -->
-        <div class="headerDetails">
-          <p class="blog">Destination</p>
-          <h1 class="blogTitle">Exploring the Wonders of Hiking</h1>
-          <p class="blogContent">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-            quasi sed earum quae error quas.
-          </p>
-        </div>
+      <?php endif; ?>
+      <!-- second div in the first section -->
+      <div class="headerDetails">
+        <p class="blog">Destination</p>
+        <h1 class="blogTitle">Exploring the Wonders of Hiking</h1>
+        <p class="blogContent">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+          quasi sed earum quae error quas.
+        </p>
+      </div>
       </div>
     </section>
 
@@ -172,7 +194,10 @@
     </footer>
   </div>
 
-  <script src="assets/js/page.js"></script>
+  <script src="assets/js/modal.js"></script>
+  <script src="assets/js/page.js" type="module"></script>
+
+
 </body>
 
 </html>
