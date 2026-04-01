@@ -251,17 +251,14 @@ body {
 .cardDetails .blogTitle {
   font-size: 19px;
   width: 100%;
-}
-
-.cardDetails .blogTitle a {
   text-decoration: none;
-  color: #000;
-  transition: 100ms ease-in-out;
+  color: #555;
+  transition: 300ms ease-in-out;
+  cursor: pointer;
 }
 
-.cardDetails .blogTitle a:hover {
-  color: rgb(0, 0, 0, 0.7);
-  cursor: pointer;
+.cardDetails .blogTitle:hover {
+  color: #ccc;
 }
 
 .cardDetails .blogContent {
