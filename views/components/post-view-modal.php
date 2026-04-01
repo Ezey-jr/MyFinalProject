@@ -26,11 +26,11 @@
       <!-- Meta Information -->
       <div class="modal-meta-info">
         <div class="modal-meta-item">
-          <span class="modal-meta-label">Author:kenneth</span>
+          <span class="modal-meta-label">Author:</span>
           <strong id="modalAuthor">—</strong>
         </div>
         <div class="modal-meta-item">
-          <span class="modal-meta-label">Date:january 1</span>
+          <span class="modal-meta-label">Date:</span>
           <strong id="modalDate">—</strong>
         </div>
         <div class="modal-meta-item">
