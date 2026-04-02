@@ -2,49 +2,77 @@
  * Opens the post viewing modal with post data
  * @param {Object} postData - Post object with id, title, excerpt, body, author, date, category, status, views
  */
-const modal = document.getElementById('postModal');
+const id = (id) => document.getElementById(id);
+const qa = (qa) => document.querySelectorAll(qa);
+
+const Element = {
+  modal: {
+    postModal: id('postModal'),
+    modalTitle: id('modalTitle'),
+    modalAuthor: id('modalAuthor'),
+    modalDate: id('modalDate'),
+    modalViews: id('modalViews'),
+    modalCategory: id('modalCategory'),
+    modalStatusBadge: id('modalStatusBadge'),
+    modalExcerpt: id('modalExcerpt'),
+    modalBody: id('modalBody'),
+    modalEditBtn: id('modalEditBtn'),
+    modalCloseBtn: id('modalCloseBtn'),
+    modalCloseFooterBtn: id('modalCloseFooterBtn'),
+  },
+  card: {
+    cardWrapper: id('card-wrapper'),
+  },
+  search: id('searchInput'),
+};
 
 function insertTextToModel(postData) {
-  if (!modal) return;
+  if (!Element.modal) return;
+  const { title, author, date, views, category, status, excerpt, body } =
+    postData;
+  const {
+    modalTitle,
+    modalAuthor,
+    modalDate,
+    modalViews,
+    modalCategory,
+    modalStatusBadge,
+    modalExcerpt,
+    modalBody,
+    modalEditBtn,
+  } = Element.modal;
 
   // Populate modal content
-  document.getElementById('modalTitle').textContent = postData.title;
-  document.getElementById('modalAuthor').textContent =
-    postData.author || 'Unknown';
-  document.getElementById('modalDate').textContent = postData.date || 'N/A';
-  document.getElementById('modalViews').textContent =
-    postData.views > 0 ? postData.views.toLocaleString() : '0';
-  document.getElementById('modalCategory').textContent =
-    postData.category || 'Uncategorized';
+  modalTitle.textContent = title;
+  modalAuthor.textContent = author || 'Unknown';
+  modalDate.textContent = date || 'N/A';
+  modalViews.textContent = views > 0 ? views.toLocaleString() : '0';
+  modalCategory.textContent = category || 'Uncategorized';
 
   // Update status badge
-  const statusBadge = document.getElementById('modalStatusBadge');
-  statusBadge.textContent = postData.status || 'draft';
-  statusBadge.className = 'modal-status-badge ' + (postData.status || 'draft');
+  modalStatusBadge.textContent = status || 'draft';
+  modalStatusBadge.className = 'modal-status-badge ' + (status || 'draft');
 
   // Set excerpt and body (body supports HTML)
-  document.getElementById('modalExcerpt').textContent = postData.excerpt || '';
-  document.getElementById('modalBody').innerHTML = postData.body || '';
+  modalExcerpt.textContent = excerpt || '';
+  modalBody.innerHTML = body || '';
 
   // Update Edit button link
-  const editBtn = document.getElementById('modalEditBtn');
-  editBtn.href = 'edit-post.php?id=' + postData.id;
-
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  modalEditBtn.href = 'edit-post.php?id=' + postData.id;
 }
 
 /**
  * Closes the post viewing modal with animation
  */
 function closePostModal() {
-  const modal = document.getElementById('postModal');
-  if (!modal) return;
+  const { postModal } = Element.modal;
 
-  modal.classList.add('closing');
+  if (!postModal) return;
+
+  postModal.classList.add('closing');
 
   setTimeout(() => {
-    modal.classList.remove('open', 'closing');
+    postModal.classList.remove('open', 'closing');
     document.body.style.overflow = '';
   }, 300);
 }
@@ -53,27 +81,24 @@ function closePostModal() {
  * Initialize modal event listeners (call on DOMContentLoaded)
  */
 function initPostModal() {
-  const modal = document.getElementById('postModal');
-  if (!modal) return;
-
-  const closeBtn = document.getElementById('modalCloseBtn');
-  const closeFooterBtn = document.getElementById('modalCloseFooterBtn');
+  const { postModal, modalCloseFooterBtn, modalCloseBtn } = Element.modal;
+  if (!postModal) return;
 
   // Close button (X)
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closePostModal);
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closePostModal);
   }
 
   // Escape key to close
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
+    if (e.key === 'Escape' && postModal.classList.contains('open')) {
       closePostModal();
     }
   });
 
   // Close footer button
-  if (closeFooterBtn) {
-    closeFooterBtn.addEventListener('click', closePostModal);
+  if (modalCloseFooterBtn) {
+    modalCloseFooterBtn.addEventListener('click', closePostModal);
   }
 }
 
@@ -84,14 +109,20 @@ if (document.readyState === 'loading') {
   initPostModal();
 }
 
-// fetch the blogs using API
-const cardWrapper = document.getElementById('card-wrapper');
-
+// RENDER POST CARDS
+let allPosts = [];
 function renderPost(posts) {
+  const { cardWrapper } = Element.card;
+
+  if (!cardWrapper) return;
+  if (posts.length === 0) {
+    cardWrapper.innerHTML = `<p class="no-posts">Loading...</p>`;
+    return;
+  }
+
   cardWrapper.innerHTML = posts
     .map(
-      (post) => `
-  <div class="card" id="card-post">
+      (post) => `<div class="card" id="card-post">
     <img src="http://localhost/php_sandbox_2/final_project/assets/file_uploads/${post.featured_image}" alt="Post Image" />
     <p class="blog nation">${post.category}</p>
 
@@ -114,6 +145,8 @@ function renderPost(posts) {
     )
     .join('');
 
+  // MODAL CLICK HANDLER
+
   cardWrapper.addEventListener('click', (e) => {
     const btn = e.target.closest('.post-btn');
     if (!btn) return;
@@ -123,35 +156,66 @@ function renderPost(posts) {
 
     if (post) {
       insertTextToModel(post);
-      modal.classList.add('open');
+      Element.modal.postModal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
   });
 }
 
-// check line 133
-// document.addEventListener('DOMContentLoaded', () => {
-//   const postBtns = document.querySelectorAll('.post-btn');
-//   postBtns.forEach((postBtn) => {
-//     postBtn.addEventListener('click', (e) => {
-//       const id = e.target.dataset.post;
-//       console.log(id);
-//     });
-//   });
-// });
+// FETCH POST USING RESTFUL API
+
+const API_URL = 'http://localhost/php_sandbox/MyFinalProject/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
+
+
+// SEARCH FUNCTIONALITY
+const SEARCH_FIELDS = ['title', 'author'];
+let debounceTimer = null;
+
+function searchBackend(query) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(async () => {
+    const q = query.trim();
+    if (!q) {
+      renderPost(allPosts);
+      return;
+    }
+    try {
+      const response = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      renderPost(data);
+    } catch (err) {
+      console.error('Search error:', err.message);
+    }
+  }, 500);
+}
+
+// INITALIZE SEARCH
+if (Element.search) {
+  Element.search.addEventListener('input', (e) => {
+    const query = e.target.value;
+
+    if (!query.trim()) {
+      // Input cleared — immediately restore all posts from memory, no API call
+      clearTimeout(debounceTimer);
+      renderPost(allPosts);
+      return;
+    }
+
+    // searchPosts(query);
+    searchBackend(query);
+  });
+}
 
 async function fetchPost() {
-  // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
-
-  const url = 'http://localhost/php_sandbox/MyFinalProject/api/';
-
   try {
-    const response = await fetch(url);
+    const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error(`Error occurred: ${response.status}`);
     }
     const data = await response.json();
     renderPost(data);
+    allPosts = data;
   } catch (error) {
     console.error(error.message);
   }

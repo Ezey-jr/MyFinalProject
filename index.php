@@ -57,7 +57,7 @@ $total_posts = count(PostController::index());
           <?php endif; ?>
 
           <div class="searchCon">
-            <input type="search" name="" id="search" placeholder="search.." />
+            <input type="search" name="" id="searchInput" placeholder="search.." />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
