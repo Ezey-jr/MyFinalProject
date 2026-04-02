@@ -188,6 +188,10 @@ body {
   flex-shrink: 0;
   gap: 2%;
 }
+.no-posts {
+  color: #883939;
+  padding: 1rem 0;
+}
 
 /* .cardGroup{
   width: 100%;
