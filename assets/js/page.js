@@ -23,6 +23,7 @@ const Element = {
   card: {
     cardWrapper: id('card-wrapper'),
   },
+  search: id('searchInput'),
 };
 
 function insertTextToModel(postData) {
@@ -108,12 +109,16 @@ if (document.readyState === 'loading') {
   initPostModal();
 }
 
-// fetch the blogs using API
-
+// RENDER POST CARDS
+let allPosts = [];
 function renderPost(posts) {
   const { cardWrapper } = Element.card;
 
   if (!cardWrapper) return;
+  if (posts.length === 0) {
+    cardWrapper.innerHTML = `<p class="no-posts">Loading...</p>`;
+    return;
+  }
 
   cardWrapper.innerHTML = posts
     .map(
@@ -140,6 +145,8 @@ function renderPost(posts) {
     )
     .join('');
 
+  // MODAL CLICK HANDLER
+
   cardWrapper.addEventListener('click', (e) => {
     const btn = e.target.closest('.post-btn');
     if (!btn) return;
@@ -155,18 +162,60 @@ function renderPost(posts) {
   });
 }
 
+// FETCH POST USING RESTFUL API
+
+const API_URL = 'http://localhost/php_sandbox/MyFinalProject/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
+
+
+// SEARCH FUNCTIONALITY
+const SEARCH_FIELDS = ['title', 'author'];
+let debounceTimer = null;
+
+function searchBackend(query) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(async () => {
+    const q = query.trim();
+    if (!q) {
+      renderPost(allPosts);
+      return;
+    }
+    try {
+      const response = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      renderPost(data);
+    } catch (err) {
+      console.error('Search error:', err.message);
+    }
+  }, 500);
+}
+
+// INITALIZE SEARCH
+if (Element.search) {
+  Element.search.addEventListener('input', (e) => {
+    const query = e.target.value;
+
+    if (!query.trim()) {
+      // Input cleared — immediately restore all posts from memory, no API call
+      clearTimeout(debounceTimer);
+      renderPost(allPosts);
+      return;
+    }
+
+    // searchPosts(query);
+    searchBackend(query);
+  });
+}
+
 async function fetchPost() {
-  // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
-
-  const url = 'http://localhost/php_sandbox/MyFinalProject/api/';
-
   try {
-    const response = await fetch(url);
+    const response = await fetch(API_URL);
     if (!response.ok) {
       throw new Error(`Error occurred: ${response.status}`);
     }
     const data = await response.json();
     renderPost(data);
+    allPosts = data;
   } catch (error) {
     console.error(error.message);
   }
