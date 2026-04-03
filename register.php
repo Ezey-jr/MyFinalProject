@@ -64,6 +64,11 @@ require_once ROOT . "/Core/Auth.php";
           <i class="fa-solid fa-lock"></i>
           <input type="password" name="password_again" placeholder="Confirm Password">
         </div>
+        <?php if (Message::check()): ?>
+          <span class="error">
+            <?= htmlspecialchars(Message::getMessage(), ENT_QUOTES, 'UTF-8'); ?>
+          </span>
+        <?php endif; ?>
         <button class="signUpBtn" type="submit">Sign Up</button>
       </form>
     </div>
