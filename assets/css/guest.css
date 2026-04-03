@@ -115,7 +115,7 @@ h1 {
 }
 
 .error{
-  displayrgba(255, 0, 0, 0.63);
+  display: block;
   color: rgba(255, 0, 0, 0.671);
   font-size: .85rem;
 }
