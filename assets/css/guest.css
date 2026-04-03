@@ -114,16 +114,8 @@ h1 {
   background-color: rgba(7, 151, 132, 0.7);
 }
 
-/* errors display */
-.errors {
-  border: 1px solid red;
-  padding: 2rem;
-  background-color: rgb(250, 8, 8, 0.5);
-}
-.errors > ul {
-  list-style-type: none;
-}
-
-.errors > li {
-  color: red;
+.error{
+  displayrgba(255, 0, 0, 0.63);
+  color: rgba(255, 0, 0, 0.671);
+  font-size: .85rem;
 }
