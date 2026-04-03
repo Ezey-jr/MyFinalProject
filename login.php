@@ -65,13 +65,7 @@ Auth::logout_redirect();
 
         <button class="signUpBtn" type="submit">Sign In</button>
       </form>
-
-
-
-
-
     </div>
-
   </div>
 </body>
 
