@@ -1,86 +1,73 @@
 <?php
 require_once "Core/Helpers.php";
 require_once "views/components/inc_register.php";
-var_dump($errors);
+require_once "Core/Config.php";
+require_once    ROOT . "/Core/Message.php";
+require_once ROOT . "/Core/Auth.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="assets/css/guest.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="assets/css/guest.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <div class="container">
-        <div class="signInCon">
-            <div class="logo">
-                <i class="fa-solid fa-qrcode"></i>
-                Blueco
-            </div>
-            <div class="signInDetails">
-                <h1>Welcome Back!</h1>
-                <p>To keep connecting with us please login with your personal info.</p>
-                <button class="signInBtn"><a href="">Sign In</a></button>
-            </div>
-        </div>
-
-        <div class="signUpCon">
-            <h1>Create Account</h1>
-            <div class="signUpLogos">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-google-plus-g"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
-            </div>
-            <p>Or use your email for registration:</p>
-
-
-            <!-- will be displaying errors here -->
-
-            <!-- <div class="errors">
-                    <ul>
-                        <li class="error">Password not correct</li>
-                    </ul>
-            </div> -->
-
-            <form action="" method="post">
-                <div class="signUpData">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" placeholder="Name" <?php if (Helpers::old_value("name")) { ?> value="<?= Helpers::old_value("name") ?>" <?php } ?> name="name">
-                </div>
-                <div class="signUpData">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="email" name="email" placeholder="Email" <?php if (Helpers::old_value("email")) { ?> value="<?= Helpers::old_value("email") ?>" <?php } ?>>
-                </div>
-                <div class="signUpData">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="password" placeholder="Password" >
-                </div>
-
-                <div class="signUpData">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="password_again" placeholder="Confirm Password">
-                </div>
-                <button class="signUpBtn" type="submit">Sign Up</button>
-            </form>
-
-
-
-
-
-        </div>
-
+  <div class="container">
+    <div class="signInCon">
+      <div class="logo">
+        <i class="fa-solid fa-qrcode"></i>
+        Blueco
+      </div>
+      <div class="signInDetails">
+        <h1>Welcome Back!</h1>
+        <p>To keep connecting with us please login with your personal info.</p>
+        <button class="signInBtn"><a href="">Sign In</a></button>
+      </div>
     </div>
+
+    <div class="signUpCon">
+      <h1>Create Account</h1>
+      <div class="signUpLogos">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-google-plus-g"></i>
+        <i class="fa-brands fa-linkedin-in"></i>
+      </div>
+      <p>Or use your email for registration:</p>
+
+      <form action="" method="post">
+        <div class="signUpData">
+          <i class="fa-regular fa-user"></i>
+          <input type="text" placeholder="Name" <?php if (Helpers::old_value("name")) { ?> value="<?= Helpers::old_value("name") ?>" <?php } ?> name="name">
+        </div>
+        <div class="signUpData">
+          <i class="fa-regular fa-envelope"></i>
+          <input type="email" name="email" placeholder="Email" <?php if (Helpers::old_value("email")) { ?> value="<?= Helpers::old_value("email") ?>" <?php } ?>>
+        </div>
+        <div class="signUpData">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="signUpData">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" name="password_again" placeholder="Confirm Password">
+        </div>
+        <button class="signUpBtn" type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>
