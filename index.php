@@ -34,8 +34,6 @@ $total_posts = count(PostController::index());
 
 </head>
 
-<?php // include modals
-include_once ROOT . "/views/components/post-view-modal.php"; ?>
 
 <body>
   <!-- main container -->
@@ -59,7 +57,7 @@ include_once ROOT . "/views/components/post-view-modal.php"; ?>
           <?php endif; ?>
 
           <div class="searchCon">
-            <input type="search" name="" id="search" placeholder="search.." />
+            <input type="search" name="" id="searchInput" placeholder="search.." />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
@@ -194,7 +192,10 @@ include_once ROOT . "/views/components/post-view-modal.php"; ?>
     </footer>
   </div>
 
-  <script src="assets/js/modal.js"></script>
+  <?php // include modals
+  include_once ROOT . "/views/components/post-view-modal.php";
+  ?>
+
   <script src="assets/js/page.js" type="module"></script>
 
 
