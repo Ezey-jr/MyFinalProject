@@ -164,7 +164,18 @@ function renderPost(posts) {
 
 // FETCH POST USING RESTFUL API
 
-const API_URL = 'http://localhost/php_sandbox_2/final_project/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
+<<<<<<< HEAD
+// check line 133
+function handleShowPost() {
+  const postBtns = document.querySelectorAll(".post-btn");
+  postBtns.forEach(postBtn => {
+    postBtn.addEventListener('click', e => {
+      const id = e.target.dataset.post;
+
+    })
+  });
+=======
+const API_URL = 'http://localhost/php_sandbox/MyFinalProject/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
 
 
 // SEARCH FUNCTIONALITY
