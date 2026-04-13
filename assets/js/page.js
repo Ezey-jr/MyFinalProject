@@ -73,10 +73,3 @@ async function fetchPost() {
 }
 document.addEventListener('DOMContentLoaded', fetchPost);
 
-document.addEventListener('DOMContentLoaded', () =>{
-  const cardPost = document.getElementById('card-post')
-
-  cardPost.addEventListener('click', () => {
-    
-  })
-})
