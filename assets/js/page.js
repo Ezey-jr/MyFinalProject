@@ -58,7 +58,7 @@ function renderPost(posts) {
 }
  console.log('hello')
 async function fetchPost() {
-  const url = 'http://localhost/php_sandbox/MyFinalProject/api/';
+  const url = 'http://localhost/php_sandbox/project/api/';
 
   try {
     const response = await fetch(url);
