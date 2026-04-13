@@ -6,7 +6,7 @@
 
 
 function openPostModal(postData) {
-  
+
   const modal = document.getElementById('postModal');
   if (!modal) return;
 
@@ -150,14 +150,14 @@ function renderPost(posts) {
 // }
 
 // check line 133
-function handleShowPost(){
-    const postBtns = document.querySelectorAll(".post-btn");
-    postBtns.forEach(postBtn => {
-        postBtn.addEventListener('click', e =>{
-            const id = e.target.dataset.post;
-            
-        })
-    });
+function handleShowPost() {
+  const postBtns = document.querySelectorAll(".post-btn");
+  postBtns.forEach(postBtn => {
+    postBtn.addEventListener('click', e => {
+      const id = e.target.dataset.post;
+
+    })
+  });
 }
 async function fetchPost() {
   const url = 'http://localhost/php_sandbox_2/final_project/api/';
