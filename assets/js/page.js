@@ -26,12 +26,6 @@ const Element = {
   search: id('searchInput'),
 };
 
-<<<<<<< HEAD
-function openPostModal(postData) {
-
-  const modal = document.getElementById('postModal');
-  if (!modal) return;
-=======
 function insertTextToModel(postData) {
   if (!Element.modal) return;
   const { title, author, date, views, category, status, excerpt, body } =
@@ -47,7 +41,6 @@ function insertTextToModel(postData) {
     modalBody,
     modalEditBtn,
   } = Element.modal;
->>>>>>> aacfd7dc671bf58729e2a0577a2f42357b9e3043
 
   // Populate modal content
   modalTitle.textContent = title;
@@ -171,18 +164,7 @@ function renderPost(posts) {
 
 // FETCH POST USING RESTFUL API
 
-<<<<<<< HEAD
-// check line 133
-function handleShowPost() {
-  const postBtns = document.querySelectorAll(".post-btn");
-  postBtns.forEach(postBtn => {
-    postBtn.addEventListener('click', e => {
-      const id = e.target.dataset.post;
-
-    })
-  });
-=======
-const API_URL = 'http://localhost/php_sandbox/MyFinalProject/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
+const API_URL = 'http://localhost/php_sandbox_2/final_project/api/'; // REMEMBER TO CHANGE THIS API LINK TO YOUR LOCALHOST LINK
 
 
 // SEARCH FUNCTIONALITY
@@ -206,7 +188,6 @@ function searchBackend(query) {
       console.error('Search error:', err.message);
     }
   }, 500);
->>>>>>> aacfd7dc671bf58729e2a0577a2f42357b9e3043
 }
 
 // INITALIZE SEARCH

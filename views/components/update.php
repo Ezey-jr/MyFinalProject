@@ -1,7 +1,21 @@
 <?php
 
+
+
+
+
 // ── Handle update ──
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // checking for csrf token if it is set
+    if (!isset($_POST['csrf_token']) && empty($_POST['csrf_token'])) {
+        die("unauthorized requested");
+    }
+
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+
+        die("unauthorized request");
+    }
 
 
     // ── Sanitize inputs ──
@@ -12,6 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $excerpt  = Helpers::sanitize($_POST["excerpt"]  ?? "");
     $body     = Helpers::sanitize($_POST["body"]     ?? "");
     $meta_desc = Helpers::sanitize($_POST["meta_desc"] ?? "");
+
+
+
 
     if (empty($title) || empty($body)) {
         $error_msg = "Title and content are required.";
@@ -27,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ];
 
         PostController::update($id, $data);
+        unset($_SESSION['csrf_token']);
         $success_msg = "Post updated successfully!";
     }
 }

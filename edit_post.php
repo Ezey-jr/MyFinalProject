@@ -7,6 +7,12 @@ require_once "Core/Auth.php";
 require_once "Controller/PostController.php";
 // start session everytime
 Session::start();
+if (empty($_SESSION['csrf_token'])) {
+  Session::csrf_token();
+}
+
+
+
 Auth::login_redirect();
 
 $user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
@@ -111,6 +117,8 @@ $post = $post_result->fetch(PDO::FETCH_ASSOC);
           <div class="form-card-header">Post Content</div>
           <div class="form-card-body">
 
+            <!-- csrf token -->
+            <input type="hidden" name="csrf_token" value="<?=  isset($_SESSION['csrf_token'])? $_SESSION['csrf_token'] : ""; ?>">
             <div class="form-group">
               <label class="form-label" for="title">Post Title <span class="req">*</span></label>
               <input type="text" class="form-input" id="title" name="title"

@@ -37,4 +37,8 @@ class Session
     // Update last activity time
     $_SESSION['last_activity'] = time();
   }
+
+  public static function csrf_token(){
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  }
 }
