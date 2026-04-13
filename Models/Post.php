@@ -10,8 +10,6 @@ class Post
     public static function create(array $data)
     {
 
-
-
         if (isset($data['featured_image']) && !empty($data['featured_image'])) {
             $sql = "INSERT INTO `posts` (`title`,`author`,`body`, `category`, `status`, `excerpt`, `meta_desc`, `user_id`, `featured_image`)  VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = Db::connection()->prepare($sql);
