@@ -1,23 +1,11 @@
 <?php
 
 
-<<<<<<< HEAD
-class Session
-{
-  // starts a new session
-  public static function start()
-  {
-    session_start();
-    self::check_timeout();
-    return true;
-  }
-=======
  class Session {
     // starts a new session
-   //   public static function start (){
-   //      return session_start();
-   //   }
->>>>>>> origin
+     public static function start (){
+        return session_start();
+     }
 
   public static function stop()
   {
