@@ -6,7 +6,7 @@ include_once "views/components/inc_add_post.php";
 $page_title = "Add New Post";
 
 $total_posts = count(PostController::index()) ;
-$user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
+// $user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator"; 
 
 include_once "views/layouts/header.php";
 ?>

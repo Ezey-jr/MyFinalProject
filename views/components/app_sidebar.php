@@ -69,7 +69,7 @@
       <div class="user-avatar">A</div>
       <div class="user-info">
         <div class="user-name">User</div>
-        <div class="user-role"><?= $user_type; ?></div>
+        <!-- <div class="user-role"><?= $user_type; ?></div> -->
       </div>
     </div>
   </div>

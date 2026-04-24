@@ -7,9 +7,9 @@ require_once "Core/Auth.php";
 require_once "Controller/PostController.php";
 // start session everytime
 Session::start();
-Auth::login_redirect();
+// Auth::login_redirect();  
 
-$user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
+// $user_type = Auth::user()->user_type == 1 ? "Administrator" : "Moderator";
 
 $total_posts = count(PostController::index()) ;
 
